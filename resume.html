@@ -11,7 +11,7 @@
 
 
 
-<title>About</title>
+<title>resume.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -259,6 +262,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -266,6 +332,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -324,18 +400,41 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">About</h1>
 
 </div>
 
 
-<p><img src="images/IMG_5167.JPG" /></p>
-<p>Yue Liu or 刘玥</p>
-<p>is a student at Columbia University Mailman School of Public Health Biostatistics MS program.</p>
-<p>She now lives happily with her cat, Tappie.</p>
+<h1 style="text-align:center">
+Résumé
+</h1>
+<div id="education" class="section level3">
+<h3>Education</h3>
+<p>• Columbia University, Mailman School of Public Health, New York, NY <font size ="0.8">Expected May 2022</font></p>
+<p>    Master of Science (MS) in Biostatistics Pharmaceutical Statistics Track</p>
+<p>• University of California, Davis, College of Biological Sciences, Davis, CA <font size ="0.8">Jun. 2020</font></p>
+<p>    Bachelor of Science (BS) Majored in Neurobiology, Physiology, and Behavior, Minored in Statistics</p>
+<hr />
+</div>
+<div id="research-experience" class="section level3">
+<h3>Research Experience</h3>
+<p><strong>University of California, Davis</strong>, Davis, CA</p>
+<p>Research Assistant, Dr. Chengji Zhou’s Lab <font size ="0.8">Nov. 2017 – Aug. 2020</font></p>
+<p>Supported with research in 2 biochemistry and biophysics published studies. Accurately extracted DNA samples from mouse tissues and ran PCR samples to discover mechanisms underlying mammalian neural tube closure and orofacial clefts development.</p>
+<p>Performed daily mouse pregnancy detection and euthanasia tasks on every weekend to ensure genetic data can be collected correctly.</p>
+<p>Conducted independent research tasks on detecting Wnt/<span class="math inline">\(\beta\)</span> - catenin signaling by using luciferase assays and HEK293 cells.</p>
+<hr />
+</div>
+<div id="additional-experience" class="section level3">
+<h3>Additional Experience</h3>
+<p><strong>Shanghai Public Health Clinical Center</strong>, Shanghai, China</p>
+<p>Epidemiology Research Intern, Dr. Pei Ning’s lab <font size ="0.8">Oct. 2019 – Nov. 2019</font></p>
+<p>Analyzed 429 tuberculosis patients’ medication susceptibility test results to verify significant differences exist in drug resistance conditions among patients by using R.</p>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -368,6 +467,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

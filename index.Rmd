@@ -1,52 +1,20 @@
 ---
-title: "My awesome website"
+title: "Yue's website"
 output: 
   html_document:
     toc: true
     toc_float: true
-    code_folding: hide
 ---
 
-# This is Jeff's awesome website
+Hello
 
-What if I add some text here...?
-
-
-## Here's a subsection
-
-And here's some addition text...
-
-```{r}
-rnorm(10)
-```
-
-## Links
-
-Let's link to useful tools for data science:
-
-* [Google](https://www.google.com/)
-* [P8105](https://p8105.com)
-
-## Local image 
-
-<img src="image/IMG_4968.jpg"style = "width:75%">
-
-![](image/IMG_4968.jpg)
+This is Yue Liu's website. 
 
 ## Link to page within the site
 
 [About me](about.html)
 
-## Quarterly Results {.tabset}
+[Resume](resume.html)
 
-### By Product
+[Dashboard](dashboard.html)
 
-Thie is my first tab and i can do stuff
-
-### By Region
-
-this is my second tab
-
-## This is a new section
-
-great
